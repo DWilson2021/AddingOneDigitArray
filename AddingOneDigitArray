@@ -1,0 +1,53 @@
+import java.util.Random;
+public class AddingOneDigitArray {
+    public static void main(String []args) {
+        int [] n = new int[10];
+        Random random = new Random();
+        for (int i = 0; i < n.length; i++) {
+            n[i] = random.nextInt(10);
+        }
+        if(n[0] == 0 && n.length != 1) {
+            n[0] = 1;
+        }
+        String old = "Old Array: [ ";
+        for(int c = 0; c < n.length; c++) {
+            int l = n.length - c;
+            if(l == 1) {
+                old += n[c];
+            } else {
+                old += n[c] + ", ";
+            }
+        }
+        old += " ]";
+        System.out.println(old);
+        long startTime = System.nanoTime();
+        int [] a = addingOne(n);
+        long endTime   = System.nanoTime();
+        long totalTime = endTime - startTime;
+        String array = "New Array: [ ";
+        for(int b = 0; b < a.length; b++) {
+            int l = a.length - b;
+            if(l == 1) {
+                array += a[b];
+            } else {
+                array += a[b] + ", ";
+            }
+        }
+        array += " ]";
+        System.out.println(array);
+        System.out.println("Time spent in nanoseconds: " + totalTime);
+    }
+    public static int [] addingOne(int [] num) {
+        int n = num.length;
+        for (int i = n - 1; i >= 0; i--) {
+            if (num[i] < 9) {
+                num[i] = num[i] + 1;
+                return num;
+            }
+            num[i] = 0;
+        }
+        int[] newNum = new int[n + 1];
+        newNum[0] = 1;
+        return newNum;
+    }
+}
